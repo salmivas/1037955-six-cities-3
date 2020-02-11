@@ -16,6 +16,7 @@ it(`<App/> should render an entire app`, () => {
   .create(<App
     offersCount = {Settings.OFFERS_COUNT}
     offers = {offers}
+    onLocationItemClick = {() => {}}
   />)
   .toJSON();
 

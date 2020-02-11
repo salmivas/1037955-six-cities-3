@@ -79,6 +79,7 @@ exports[`<App/> should render an entire app 1`] = `
             <a
               className="locations__item-link tabs__item"
               href="#"
+              onClick={[Function]}
             >
               <span>
                 Paris

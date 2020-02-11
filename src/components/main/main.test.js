@@ -16,6 +16,7 @@ it(`<PlaceCard/> should render`, () => {
   .create(<Main
     offersCount = {Settings.OFFERS_COUNT}
     offers = {offers}
+    onLocationItemClick = {() => {}}
   />)
   .toJSON();
 
