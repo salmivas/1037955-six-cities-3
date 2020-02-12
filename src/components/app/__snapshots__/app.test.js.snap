@@ -92,6 +92,7 @@ exports[`<App/> should render an entire app 1`] = `
             <a
               className="locations__item-link tabs__item"
               href="#"
+              onClick={[Function]}
             >
               <span>
                 Cologne
@@ -104,6 +105,7 @@ exports[`<App/> should render an entire app 1`] = `
             <a
               className="locations__item-link tabs__item"
               href="#"
+              onClick={[Function]}
             >
               <span>
                 Brussels
@@ -115,6 +117,7 @@ exports[`<App/> should render an entire app 1`] = `
           >
             <a
               className="locations__item-link tabs__item tabs__item--active"
+              onClick={[Function]}
             >
               <span>
                 Amsterdam
@@ -127,6 +130,7 @@ exports[`<App/> should render an entire app 1`] = `
             <a
               className="locations__item-link tabs__item"
               href="#"
+              onClick={[Function]}
             >
               <span>
                 Hamburg
@@ -139,6 +143,7 @@ exports[`<App/> should render an entire app 1`] = `
             <a
               className="locations__item-link tabs__item"
               href="#"
+              onClick={[Function]}
             >
               <span>
                 Dusseldorf
