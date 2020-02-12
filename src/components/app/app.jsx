@@ -2,11 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
 
+const locationItemLinkHandler = () => {};
+
 const App = ({offersCount, offers}) => {
   return (
     <Main
       offersCount = {offersCount}
       offers = {offers}
+      onLocationItemLinkClick = {locationItemLinkHandler}
     />
   );
 };
