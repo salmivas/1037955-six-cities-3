@@ -1,10 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Main from "./main.jsx";
-
-const Settings = {
-  OFFERS_COUNT: 400
-};
+import OffersList from "./offers-list.jsx";
 
 const offers = [
   {
@@ -23,12 +19,10 @@ const offers = [
   },
 ];
 
-it(`<PlaceCard/> should render`, () => {
+it(`<OffersList/> should render list of offers`, () => {
   const tree = renderer
-  .create(<Main
-    offersCount = {Settings.OFFERS_COUNT}
+  .create(<OffersList
     offers = {offers}
-    onLocationItemLinkClick = {() => {}}
   />)
   .toJSON();
 

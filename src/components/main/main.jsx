@@ -1,15 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import PlaceCard from "../place-card/place-card.jsx";
+import OffersList from "../offers-list/offers-list.jsx";
 
 const Main = ({offersCount, offers, onLocationItemLinkClick}) => {
-  const offersList = offers.map((offer, index) => (
-    <PlaceCard
-      offer = {offer}
-      key = {index}
-    />
-  ));
-
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -115,10 +108,9 @@ const Main = ({offersCount, offers, onLocationItemLinkClick}) => {
                   <li className="places__option" tabIndex="0">Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {offersList}
-
-              </div>
+              <OffersList
+                offers = {offers}
+              />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
@@ -135,8 +127,10 @@ Main.propTypes = {
   onLocationItemLinkClick: PropTypes.func.isRequired,
   offers: PropTypes.arrayOf(
       PropTypes.shape({
-        offerName: PropTypes.string.isRequired,
+        offerHeader: PropTypes.string.isRequired,
         offerImage: PropTypes.string.isRequired,
+        offerPrice: PropTypes.string.isRequired,
+        offerType: PropTypes.string.isRequired,
       })
   )
 };
