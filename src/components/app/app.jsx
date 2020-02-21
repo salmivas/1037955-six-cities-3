@@ -18,8 +18,10 @@ App.propTypes = {
   offersCount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(
       PropTypes.shape({
-        offerName: PropTypes.string.isRequired,
+        offerHeader: PropTypes.string.isRequired,
         offerImage: PropTypes.string.isRequired,
+        offerPrice: PropTypes.string.isRequired,
+        offerType: PropTypes.string.isRequired,
       })
   )
 };

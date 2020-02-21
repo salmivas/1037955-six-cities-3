@@ -12,8 +12,20 @@ const Settings = {
 };
 
 const offers = [
-  {offerName: `OfferName01`, offerImage: `img/offer-image-01.jpg`},
-  {offerName: `OfferName02`, offerImage: `img/offer-image-02.jpg`},
+  {
+    offerImage: `img/apartment-01.jpg`,
+    offerPremiality: false,
+    offerPrice: `€100`,
+    offerHeader: `Beautiful & luxurious apartment at great location`,
+    offerType: `Apartment`,
+  },
+  {
+    offerImage: `img/apartment-02.jpg`,
+    offerPremiality: true,
+    offerPrice: `€200`,
+    offerHeader: `Beautiful & luxurious apartment at great location`,
+    offerType: `House`,
+  },
 ];
 
 it(`Location link should be pressed`, () => {
