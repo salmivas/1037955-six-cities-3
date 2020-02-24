@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import OffersList from "../offers-list/offers-list.jsx";
+import Map from "../map/map.jsx";
 
 const Main = ({offersCount, offers, onLocationItemLinkClick}) => {
   return (
@@ -113,7 +114,9 @@ const Main = ({offersCount, offers, onLocationItemLinkClick}) => {
               />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <Map/>
+              </section>
             </div>
           </div>
         </div>
