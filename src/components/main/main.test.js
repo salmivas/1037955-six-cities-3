@@ -13,6 +13,7 @@ const offers = [
     price: `€100`,
     header: `Beautiful & luxurious apartment at great location`,
     type: `Apartment`,
+    position: [52.3909553943508, 4.85309666406198],
   },
   {
     image: `img/apartment-02.jpg`,
@@ -20,6 +21,7 @@ const offers = [
     price: `€200`,
     header: `Beautiful & luxurious apartment at great location`,
     type: `House`,
+    position: [52.369553943508, 4.85309666406198],
   },
 ];
 
