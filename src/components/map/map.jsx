@@ -6,7 +6,7 @@ class Map extends PureComponent {
   constructor(props) {
     super(props);
 
-    this._city = [52.38333, 4.9];
+    this._city = props.currentCity.position;
     this._zoomMap = 12;
 
     this._mapConfig = {
@@ -15,18 +15,24 @@ class Map extends PureComponent {
       zoomControl: false,
       marker: true
     };
-    this._iconConfig = leaflet.icon({
-      iconUrl: `img/pin.svg`,
-      iconSize: [30, 30]
-    });
+
+    this._iconConfig = {
+      iconBlue: leaflet.icon({
+        iconUrl: `img/pin.svg`,
+        iconSize: [30, 40]
+      }),
+      iconOrange: leaflet.icon({
+        iconUrl: `img/pin-active.svg`,
+        iconSize: [30, 40]
+      })
+    };
 
     this._mapRef = createRef();
     this._map = null;
+    this._layerGroupStorage = null;
   }
 
   componentDidMount() {
-    const {points} = this.props;
-
     if (this._mapRef.current) {
       this._map = leaflet.map(this._mapRef.current, this._mapConfig);
       this._map.setView(this._city, this._zoomMap);
@@ -37,16 +43,37 @@ class Map extends PureComponent {
         })
         .addTo(this._map);
 
-      points.map((it) => {
-        leaflet
-        .marker(it, {icon: this._iconConfig})
-        .addTo(this._map);
-      });
+      this._layerGroupStorage = {map: this._map, layerGroup: leaflet.layerGroup().addTo(this._map)};
+
+      this.updateMap();
     }
   }
 
   componentWillUnmount() {
     this._map = null;
+  }
+
+  componentDidUpdate() {
+    const {layerGroup} = this._layerGroupStorage;
+    const {currentCity} = this.props;
+
+    this._map.setView(currentCity.position, this._zoomMap);
+
+    layerGroup.clearLayers();
+    this.updateMap();
+  }
+
+  updateMap() {
+    const {currentCity, currentActiveCardID} = this.props;
+    const {layerGroup} = this._layerGroupStorage;
+
+    currentCity.offers.forEach((offer) => {
+      const icon = currentActiveCardID && currentActiveCardID === offer.id ? this._iconConfig.iconOrange : this._iconConfig.iconBlue;
+
+      leaflet
+      .marker(offer.position, {icon})
+      .addTo(layerGroup);
+    });
   }
 
   render() {
@@ -57,11 +84,13 @@ class Map extends PureComponent {
 }
 
 Map.propTypes = {
-  points: PropTypes.arrayOf(
-      PropTypes.arrayOf(
-          PropTypes.number.isRequired
-      ).isRequired
-  ).isRequired
+  currentCity: PropTypes.shape({
+    position: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+    offers: PropTypes.arrayOf(PropTypes.shape({
+      position: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+    })).isRequired
+  }).isRequired,
+  currentActiveCardID: PropTypes.number.isRequired,
 };
 
 export default Map;

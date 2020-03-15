@@ -3,31 +3,16 @@ import PropTypes from "prop-types";
 import PlaceCard from "../place-card/place-card.jsx";
 
 class OffersList extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      currentActiveCard: {}
-    };
-
-    this._currentCardHoverHandler = this._currentCardHoverHandler.bind(this);
-  }
-
-  _currentCardHoverHandler(offer) {
-    this.setState({currentActiveCard: offer});
-  }
-
   render() {
-    const {offers} = this.props;
-    const {currentActiveCard: {}} = this.state;
+    const {currentCity, currentCardHoverHandler} = this.props;
 
     return (
       <div className="cities__places-list places__list tabs__content">
-        {offers.map((offer, index) => (
+        {currentCity.offers.map((offer) => (
           <PlaceCard
-            onHover = {this._currentCardHoverHandler}
             offer = {offer}
-            key = {index}
+            key = {offer.id}
+            currentCardHoverHandler = {currentCardHoverHandler}
           />
         ))}
       </div>
@@ -36,14 +21,12 @@ class OffersList extends PureComponent {
 }
 
 OffersList.propTypes = {
-  offers: PropTypes.arrayOf(
-      PropTypes.shape({
-        header: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired,
-        price: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-      })
-  )
+  currentCity: PropTypes.shape({
+    offers: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
+    })).isRequired
+  }).isRequired,
+  currentCardHoverHandler: PropTypes.func.isRequired,
 };
 
 export default OffersList;

@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import OffersList from "./offers-list.jsx";
+import {Places} from "./places.jsx";
 
 const currentCity = {
   id: 136,
@@ -53,13 +53,39 @@ const currentCity = {
   ]
 };
 
-it(`<OffersList/> should render list of offers`, () => {
-  const tree = renderer
-  .create(<OffersList
-    currentCity = {currentCity}
-    currentCardHoverHandler = {() => {}}
-  />)
-  .toJSON();
+const cityWithEmptyOffers = {
+  id: 136,
+  name: `Paris`,
+  position: [
+    48.8566,
+    2.3522
+  ],
+  offersCount: 100,
+  offers: []
+};
 
-  expect(tree).toMatchSnapshot();
+describe(`Places rendered correctly`, () => {
+  it(`<Places/> should render a card`, () => {
+    const tree = renderer.create(
+        <Places
+          currentCity = {currentCity}
+          currentCardHoverHandler = {() => {}}
+          currentActiveCardID = {0}
+        />)
+        .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`<Places/> should render a premium card`, () => {
+    const tree = renderer.create(
+        <Places
+          currentCity = {cityWithEmptyOffers}
+          currentCardHoverHandler = {() => {}}
+          currentActiveCardID = {0}
+        />)
+        .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
 });

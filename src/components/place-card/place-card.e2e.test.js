@@ -8,6 +8,7 @@ Enzyme.configure({
 });
 
 const offer = {
+  id: 0,
   image: `img/apartment-01.jpg`,
   premiality: false,
   price: `€100`,
@@ -16,18 +17,18 @@ const offer = {
 };
 
 it(`Place card should be hovered`, () => {
-  const onHover = jest.fn();
+  const currentCardHoverHandler = jest.fn();
 
   const placeCard = shallow(
       <PlaceCard
-        onHover = {onHover}
+        currentCardHoverHandler = {currentCardHoverHandler}
         offer = {offer}
       />
   );
 
   const placeCardWrapper = placeCard.find(`.place-card`);
 
-  expect(onHover).toHaveBeenCalledTimes(0);
+  expect(currentCardHoverHandler).toHaveBeenCalledTimes(0);
   placeCardWrapper.simulate(`mouseOver`);
-  expect(onHover).toHaveBeenCalledTimes(1);
+  expect(currentCardHoverHandler).toHaveBeenCalledTimes(1);
 });
