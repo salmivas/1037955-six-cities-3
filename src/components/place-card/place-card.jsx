@@ -9,10 +9,10 @@ const PremiumMarkup = () => {
   );
 };
 
-const PlaceCard = ({offer, onHover}) => (
+const PlaceCard = ({offer, currentCardHoverHandler}) => (
   <article
     className="cities__place-card place-card"
-    onMouseOver={() => onHover(offer)}
+    onMouseOver={() => currentCardHoverHandler(offer.id)}
     key
   >
     {offer.premiality && <PremiumMarkup/>}
@@ -49,14 +49,15 @@ const PlaceCard = ({offer, onHover}) => (
 );
 
 PlaceCard.propTypes = {
-  onHover: PropTypes.func.isRequired,
   offer: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     header: PropTypes.string.isRequired,
     premiality: PropTypes.bool.isRequired,
     image: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
   }),
+  currentCardHoverHandler: PropTypes.func.isRequired,
 };
 
 export default PlaceCard;

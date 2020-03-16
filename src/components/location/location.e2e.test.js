@@ -1,6 +1,21 @@
 import React from "react";
-import renderer from "react-test-renderer";
-import OffersList from "./offers-list.jsx";
+import Enzyme, {shallow} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import Location from "./location.jsx";
+
+Enzyme.configure({
+  adapter: new Adapter(),
+});
+
+const city = {
+  id: 136,
+  name: `Paris`,
+  position: [
+    48.8566,
+    2.3522
+  ],
+  offersCount: 100
+};
 
 const currentCity = {
   id: 136,
@@ -53,13 +68,22 @@ const currentCity = {
   ]
 };
 
-it(`<OffersList/> should render list of offers`, () => {
-  const tree = renderer
-  .create(<OffersList
-    currentCity = {currentCity}
-    currentCardHoverHandler = {() => {}}
-  />)
-  .toJSON();
 
-  expect(tree).toMatchSnapshot();
+it(`Location link should be pressed`, () => {
+  const onLocationItemLinkClick = jest.fn();
+
+  const location = shallow(
+      <Location
+        city = {city}
+        currentCity = {currentCity}
+        onLocationItemLinkClick = {onLocationItemLinkClick}
+      />
+  );
+
+  const locationItem = location.find(`.tabs__item--active`);
+
+  locationItem.props().onClick();
+
+  expect(onLocationItemLinkClick.mock.calls.length).toBe(1);
 });
+
