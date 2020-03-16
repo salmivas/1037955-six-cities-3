@@ -337,16 +337,14 @@ const mocks = {
   currentActiveCardID: 0,
 };
 
-it(`<App/> should render an entire app`, () => {
+it(`<App/> should be rendered`, () => {
   const store = mockStore(mocks);
 
-  const tree = renderer
-    .create(
-        <Provider store = {store}>
-          <App/>
-        </Provider>
-    )
-    .toJSON();
+  const tree = renderer.create(
+      <Provider store = {store}>
+        <App/>
+      </Provider>
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
