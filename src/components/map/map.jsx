@@ -1,6 +1,7 @@
 import React, {PureComponent, createRef} from "react";
 import leaflet from "leaflet";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 
 class Map extends PureComponent {
   constructor(props) {
@@ -83,6 +84,11 @@ class Map extends PureComponent {
   }
 }
 
+const mapStateToProps = (state) => ({
+  currentCity: state.currentCity,
+  currentActiveCardID: state.currentActiveCardID,
+});
+
 Map.propTypes = {
   currentCity: PropTypes.shape({
     position: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
@@ -93,4 +99,5 @@ Map.propTypes = {
   currentActiveCardID: PropTypes.number.isRequired,
 };
 
-export default Map;
+export {Map};
+export default connect(mapStateToProps)(Map);

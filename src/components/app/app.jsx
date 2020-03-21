@@ -1,8 +1,16 @@
 import React, {PureComponent} from "react";
+import {connect} from "react-redux";
+import PropTypes, {object} from "prop-types";
 import Places from "../places/places.jsx";
+import MainEmpty from "../main-empty/main-empty.jsx";
 import Locations from "../locations/locations.jsx";
 
 class App extends PureComponent {
+  _renderPlaces() {
+    const {currentCity} = this.props;
+    return (currentCity.offers.length > 0) ? <Places/> : <MainEmpty/>;
+  }
+
   render() {
     return (
       <div className="page page--gray page--main">
@@ -36,7 +44,7 @@ class App extends PureComponent {
             </section>
           </div>
           <div className="cities">
-            <Places/>
+            {this._renderPlaces()}
           </div>
         </main>
       </div>
@@ -44,4 +52,15 @@ class App extends PureComponent {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  currentCity: state.currentCity,
+});
+
+App.propTypes = {
+  currentCity: PropTypes.shape({
+    offers: PropTypes.arrayOf(object).isRequired
+  }).isRequired,
+};
+
+export {App};
+export default connect(mapStateToProps)(App);

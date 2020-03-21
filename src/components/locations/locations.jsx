@@ -1,27 +1,25 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import Location from "../location/location.jsx";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer.js";
 
-class Locations extends PureComponent {
-  render() {
-    const {cities, currentCity, onLocationItemLinkClick} = this.props;
-
-    return (
-      <ul className="locations__list tabs__list">
-        {cities.map((city) =>
-          <Location
-            city = {city}
-            currentCity = {currentCity}
-            key = {city.id}
-            onLocationItemLinkClick = {onLocationItemLinkClick}
-          />
-        )}
-      </ul>
-    );
-  }
-}
+const Locations = React.memo(
+    ({cities, currentCity, onLocationItemLinkClick}) => {
+      return (
+        <ul className="locations__list tabs__list">
+          {cities.map((city) =>
+            <Location
+              city = {city}
+              currentCity = {currentCity}
+              key = {city.id}
+              onLocationItemLinkClick = {onLocationItemLinkClick}
+            />
+          )}
+        </ul>
+      );
+    });
+Locations.displayName = `Locations`;
 
 const mapStateToProps = (state) => ({
   cities: state.cities,

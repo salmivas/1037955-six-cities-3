@@ -1,17 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Location = ({city, currentCity, onLocationItemLinkClick}) => (
-  <li className="locations__item" key>
-    <a
-      onClick = {() => onLocationItemLinkClick(city.name)}
-      className = {`locations__item-link tabs__item` + (city.name === currentCity.name ? ` tabs__item--active` : ``)}
-      href="#"
-    >
-      <span>{city.name}</span>
-    </a>
-  </li>
-);
+const Location = React.memo(
+    ({city, currentCity, onLocationItemLinkClick}) => {
+      return (
+        <li className="locations__item" key>
+          <a
+            onClick = {() => onLocationItemLinkClick(city.name)}
+            className={city.name === currentCity.name ? `locations__item-link tabs__item--active` : `locations__item-link tabs__item`}
+            href="#"
+          >
+            <span>{city.name}</span>
+          </a>
+        </li>
+      );
+    });
+Location.displayName = `Location`;
 
 Location.propTypes = {
   city: PropTypes.shape({
