@@ -1,6 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
 import Map from "./map.jsx";
+
+const mockStore = configureStore([]);
 
 const currentCity = {
   id: 136,
@@ -53,15 +57,19 @@ const currentCity = {
   ]
 };
 
+const currentActiveCardID = 0;
+
 it(`Render Map`, () => {
+  const store = mockStore({currentCity, currentActiveCardID});
+
   const tree = renderer
     .create(
-        <Map
-          currentCity = {currentCity}
-          currentActiveCardID = {0}
-        />
-    )
-    .toJSON();
+        <Provider store = {store}>
+          <Map
+            currentActiveCardID = {0}
+          />
+        </Provider>
+    ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

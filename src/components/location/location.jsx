@@ -7,7 +7,7 @@ const Location = React.memo(
         <li className="locations__item" key>
           <a
             onClick = {() => onLocationItemLinkClick(city.name)}
-            className={city.name === currentCity.name ? `locations__item-link tabs__item--active` : `locations__item-link tabs__item`}
+            className= {`locations__item-link tabs__item` + (city.name === currentCity.name ? ` tabs__item--active` : ``)}
             href="#"
           >
             <span>{city.name}</span>
