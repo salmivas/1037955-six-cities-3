@@ -1,7 +1,6 @@
 # Личный проект «Шесть городов» [![Build status][travis-image]][travis-url]
 
 * Студент: [Иван Салмин](https://up.htmlacademy.ru/react/3/user/1037955).
-* Наставник: `Евгений Черкасов`.
 
 ---
 
